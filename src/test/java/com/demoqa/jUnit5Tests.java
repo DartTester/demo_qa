@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class JUnit5Tests {
+public class jUnit5Tests {
 
     @BeforeAll
     static void beforeAll() {
