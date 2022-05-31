@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class boxTests {
+public class FormTestJava {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -29,14 +29,12 @@ public class boxTests {
         $("[id=userEmail]").setValue("da@da.ru");
 
         // Radio-button
-        $("[for='gender-radio-1']").click(); //$(byText("Male")).click(); - аналогично
+        $(byText("Male")).click(); // $("[for='gender-radio-1']").click(); - аналогично
         $("[id=userNumber]").setValue("0123456789");
 
         // Date
         $("[id=dateOfBirthInput]").click();
-        $(".react-datepicker__month-select").click();
         $(".react-datepicker__month-select").selectOption("August");
-        $(".react-datepicker__year-select").click();
         $(".react-datepicker__year-select").selectOption("1993");
         $(".react-datepicker__day--010:nth-child(3)").click();
 
@@ -45,9 +43,9 @@ public class boxTests {
         $("#subjectsInput").pressEnter();
 
         // Check-box
-        $("[for='hobbies-checkbox-1']").click(); // $(byText("Sports")).click(); - аналогично
-        $("[for='hobbies-checkbox-2']").click();
-        $("[for='hobbies-checkbox-3']").click();
+        $(byText("Sports")).click(); // $("[for='hobbies-checkbox-1']").click();  - аналогично
+        $(byText("Reading")).click(); // $("[for='hobbies-checkbox-2']").click();  - аналогично
+        $(byText("Music")).click(); // $("[for='hobbies-checkbox-3']").click();  - аналогично
 
         // Picture
         $("#uploadPicture").uploadFile (new File("src/test/resources/pic.png"));
