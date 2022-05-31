@@ -24,34 +24,37 @@ public class FormTestJava {
         executeJavaScript("$('#fixedban').remove()");
 
         // Text
-        $("[id=firstName]").setValue("Daniil");
-        $("[id=lastName]").setValue("Davydov");
-        $("[id=userEmail]").setValue("da@da.ru");
+        $("[id=firstName]").setValue("Daniil"); //  $("#firstName").setValue("Daniil");
+        $("[id=lastName]").setValue("Davydov"); //  $("#firstName").setValue("Davydov");
+        $("[id=userEmail]").setValue("da@da.ru"); //  $("#firstName").setValue("da@da.ru");
 
         // Radio-button
         $(byText("Male")).click(); // $("[for='gender-radio-1']").click(); - аналогично
-        $("[id=userNumber]").setValue("0123456789");
+        $("[id=userNumber]").setValue("0123456789"); // $("#userNumber").setValue("0123456789");
 
         // Date
         $("[id=dateOfBirthInput]").click();
         $(".react-datepicker__month-select").selectOption("August");
         $(".react-datepicker__year-select").selectOption("1993");
-        $(".react-datepicker__day--010:nth-child(3)").click();
+        $("[aria-label='Choose Tuesday, August 10th, 1993']").click();
 
         // Text
-        $("#subjectsInput").sendKeys("Maths");
-        $("#subjectsInput").pressEnter();
+        $("#subjectsInput").sendKeys("m");
+        $(byText("Maths")).click();
+        // $("#subjectsInput").sendKeys("Maths");
+        // $("#subjectsInput").pressEnter();
 
         // Check-box
         $(byText("Sports")).click(); // $("[for='hobbies-checkbox-1']").click();  - аналогично
-        $(byText("Reading")).click(); // $("[for='hobbies-checkbox-2']").click();  - аналогично
-        $(byText("Music")).click(); // $("[for='hobbies-checkbox-3']").click();  - аналогично
+        $(byText("Reading")).click(); // $("#hobbiesWrapper").$(byText("Sports")).click();
+        $(byText("Music")).click();
 
         // Picture
-        $("#uploadPicture").uploadFile (new File("src/test/resources/pic.png"));
+        // $("#uploadPicture").uploadFile (new File("src/test/resources/pic.png"));
+        $("#uploadPicture").uploadFromClasspath("pic.png");
 
         // Text
-        $("[id=currentAddress]").setValue("Adress");
+        $("[id=currentAddress]").setValue("Adress"); // $("#currentAddress").setValue("Adress");
 
         // Drop-down list
         $("#state").click();
