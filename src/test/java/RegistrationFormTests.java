@@ -1,62 +1,80 @@
-package tests;
-
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$;
 
-public class RegistrationFormTests extends tests.TestBase {
-
+public class FormTestJava {
+    @BeforeAll
+    static void beforeAll() {
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1920x1080";
+        Configuration.holdBrowserOpen = true;
+    }
     @Test
     void successfulTest() {
-        String firstName = "Alex";
-        String lastName = "Egorov";
+        String name = "Alex";
 
         open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue("alex@egorov.com");
-        $("#genterWrapper").$(byText("Other")).click();
-//        $("#gender-radio-3").parent().click();
-//        $("#gender-radio-3").click(); // WRONG
-//        $(byText("Other")).click(); // WRONG
-//        $("[for=gender-radio-3]").click();
-        $("#userNumber").setValue("1231231230");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("July");
-        $(".react-datepicker__year-select").selectOption("2008");
-        $(".react-datepicker__day--030:not(.react-datepicker__day--outside-month)").click();
-//<div class="react-datepicker__day react-datepicker__day--030 react-datepicker__day--outside-month" aria-label="Choose Monday, June 30th, 2008">30</div>
-//<div class="react-datepicker__day react-datepicker__day--030"                                      aria-label="Choose Wednesday, July 30th, 2008" >30</div>
-        $("#subjectsInput").sendKeys("Maths");
-        $("#subjectsInput").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
+        // Text
+        $("[id=firstName]").setValue("Daniil"); //  $("#firstName").setValue("Daniil");
+        $("[id=lastName]").setValue("Davydov"); //  $("#firstName").setValue("Davydov");
+        $("[id=userEmail]").setValue("da@da.ru"); //  $("#firstName").setValue("da@da.ru");
+
+        // Radio-button
+        $(byText("Male")).click(); // $("[for='gender-radio-1']").click(); - аналогично
+        $("[id=userNumber]").setValue("0123456789"); // $("#userNumber").setValue("0123456789");
+
+        // Date
+        $("[id=dateOfBirthInput]").click();
+        $(".react-datepicker__month-select").selectOption("August");
+        $(".react-datepicker__year-select").selectOption("1993");
+        $("[aria-label='Choose Tuesday, August 10th, 1993']").click();
+
+        // Text
+        $("#subjectsInput").sendKeys("m");
+        $(byText("Maths")).click();
+        // $("#subjectsInput").sendKeys("Maths");
+        // $("#subjectsInput").pressEnter();
+
+        // Check-box
+        $(byText("Sports")).click(); // $("[for='hobbies-checkbox-1']").click();  - аналогично
+        $(byText("Reading")).click(); // $("#hobbiesWrapper").$(byText("Sports")).click();
+        $(byText("Music")).click();
+
+        // Picture
+        // $("#uploadPicture").uploadFile (new File("src/test/resources/pic.png"));
         $("#uploadPicture").uploadFromClasspath("pic.png");
-//        $("#uploadPicture").uploadFile(new File("src/test/resources/img/1.png"));
-        $("#currentAddress").setValue("Some street 1");
+
+        // Text
+        $("[id=currentAddress]").setValue("Adress"); // $("#currentAddress").setValue("Adress");
+
+        // Drop-down list
         $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
+        $(byText("NCR")).click();
         $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
-        $("#submit").click();
+        $(byText("Delhi")).click();
 
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-//        $(".table-responsive").shouldHave(text(firstName), text(lastName),
-//                text("alex@egorov.com"), text("Some address 1"), text("30 July,2008"));
-//
-//        $(".table-responsive").$(byText("Date of Birth"))
-//                .parent().shouldHave(text("30 July,2008"));
-        checkTable("Date of Birth", "30 July,2008");
-    }
+        $("[id=submit]").click();
 
-    void checkTable(String key, String value) {
-        $(".table-responsive").$(byText(key))
-                .parent().shouldHave(text(value));
+        // Result:
+        $(".modal-body").shouldHave(text("Daniil Davydov"),
+                text("da@da.ru"),
+                text("Male"),
+                text("0123456789"),
+                text("10 August,1993"),
+                text("Maths"),
+                text("Sports, Reading, Music"),
+                text("pic.png"),
+                text("Adress"),
+                text("NCR Delhi")
+        );
     }
 }
