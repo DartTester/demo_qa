@@ -1,34 +1,31 @@
-package tests;
-
 import org.junit.jupiter.api.Test;
+import pages.Page_one;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$;
 
-public class RegistrationFormTests extends tests.TestBase {
+public class RegistrationFormTestsWithPageobjects extends tests.TestBase {
+
+    Page_one page_one = new Page_one();
 
     @Test
     void successfulTest() {
-        String firstName = "Alex";
-        String lastName = "Egorov";
+        String firstName = "Dart";
+        String lastName = "Tester";
 
-        open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('#fixedban').remove()");
-
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue("alex@egorov.com");
-        $("#genterWrapper").$(byText("Other")).click();
+        page_one.openPage()
+        .setFirstName(firstName)
+        .setLastName(lastName)
+        .setEmail("dart@tester.com")
+        .setGender("Other");
 
         $("#userNumber").setValue("1231231230");
-        $("#dateOfBirthInput").click();
+        page_one.setDateOfBirth("4","August","1993");
+        /*$("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("July");
         $(".react-datepicker__year-select").selectOption("2008");
-        $(".react-datepicker__day--030:not(.react-datepicker__day--outside-month)").click();
+        $(".react-datepicker__day--030:not(.react-datepicker__day--outside-month)").click();*/
 
         $("#subjectsInput").sendKeys("Maths");
         $("#subjectsInput").pressEnter();
