@@ -1,20 +1,18 @@
-import org.junit.jupiter.api.Test;
-import pages.Page_one;
+package tests;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import org.junit.jupiter.api.Test;
+import pages.Page_reg_form;
 
 public class RegistrationFormTestsWithPageobjects extends tests.TestBase {
 
-    Page_one page_one = new Page_one();
+    Page_reg_form page_regform = new Page_reg_form();
 
     @Test
     void successfulTest() {
         String firstName = "Dart";
         String lastName = "Tester";
 
-        page_one.openPage()
+        page_regform.openPage()
         .setFirstName(firstName)
         .setLastName(lastName)
         .setEmail("dart@tester.com")

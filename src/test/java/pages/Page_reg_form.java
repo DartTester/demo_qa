@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class Page_one {
+public class Page_reg_form {
 
     Calender_Component calender_component = new Calender_Component();
     ResultsTable_Component resultsTable_component = new ResultsTable_Component();
     State_Component state_component = new State_Component();
     City_Component city_component = new City_Component();
-    public Page_one openPage() {
+    public Page_reg_form openPage() {
 
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
@@ -25,82 +25,82 @@ public class Page_one {
 
         return this;
     }
-    public Page_one setFirstName(String value) {
+    public Page_reg_form setFirstName(String value) {
         $("#firstName").setValue(value);
 
         return this;
     }
-    public Page_one setLastName(String value) {
+    public Page_reg_form setLastName(String value) {
         $("#lastName").setValue(value);
 
         return this;
     }
-    public Page_one setEmail(String value) {
+    public Page_reg_form setEmail(String value) {
         $("#userEmail").setValue("dart@tester.com");
 
         return this;
     }
-    public Page_one setGender(String value) {
+    public Page_reg_form setGender(String value) {
         $("#genterWrapper").$(byText("Other")).click();
 
         return this;
     }
-    public Page_one setNumber(String value) {
+    public Page_reg_form setNumber(String value) {
         $("#userNumber").setValue("81233212112");
 
         return this;
     }
-    public Page_one setDateOfBirth(String day, String month, String year) {
+    public Page_reg_form setDateOfBirth(String day, String month, String year) {
         $("#dateOfBirthInput").click();
         calender_component.setDate(day, month, year);
 
         return this;
     }
-    public Page_one setSubject(String value) {
+    public Page_reg_form setSubject(String value) {
         $("#subjectsInput").sendKeys("Maths");
         $("#subjectsInput").pressEnter();
 
         return this;
     }
-    public Page_one setHobbies(String value) {
+    public Page_reg_form setHobbies(String value) {
         $("#hobbiesWrapper").$(byText("Sports")).click();
 
         return this;
     }
-    public Page_one setPicture(String value) {
+    public Page_reg_form setPicture(String value) {
         $("#uploadPicture").uploadFromClasspath("pic.png");
 
         return this;
     }
-    public Page_one setAddress(String value) {
+    public Page_reg_form setAddress(String value) {
         $("#currentAddress").setValue("Address1");
 
         return this;
     }
-    public Page_one setState(String value) {
+    public Page_reg_form setState(String value) {
         $("#state").click();
         state_component.setState(value);
 
         return this;
     }
-    public Page_one setCity(String value) {
+    public Page_reg_form setCity(String value) {
         $("#city").click();
         city_component.setCity(value);
 
         return this;
     }
-    public Page_one clickSubmit() {
+    public Page_reg_form clickSubmit() {
         $("#submit").click();
 
         return this;
     }
-    public Page_one checkFormOpened(String value) {
+    public Page_reg_form checkFormOpened(String value) {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
 
         return this;
     }
 
-    public Page_one checkResult (String key, String value) {
+    public Page_reg_form checkResult (String key, String value) {
         resultsTable_component.checkResult(key, value);
 
         return this;
