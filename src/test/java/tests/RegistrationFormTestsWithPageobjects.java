@@ -26,7 +26,7 @@ public class RegistrationFormTestsWithPageobjects extends tests.TestBase {
         .setState("NCR")
         .setCity("Delhi")
         .clickSubmit()
-        .checkFormOpened("Thanks for submitting the form")
+        .checkFormOpened()
                 .checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", "dart@tester.com")
                 .checkResult("Date of Birth", "4 August,1993")

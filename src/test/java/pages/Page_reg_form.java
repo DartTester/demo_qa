@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import pages.components.Calender_Component;
 import pages.components.City_Component;
 import pages.components.ResultsTable_Component;
@@ -16,6 +17,23 @@ public class Page_reg_form {
     ResultsTable_Component resultsTable_component = new ResultsTable_Component();
     State_Component state_component = new State_Component();
     City_Component city_component = new City_Component();
+
+    SelenideElement
+            firstNameInput = $("#firstName"),
+            lastNameInput = $("#lastName"),
+            userEmailInput = $("#userEmail"),
+            userNumberInput = $("#userNumber"),
+            genderInput = $("#genterWrapper"),
+            dateOfBirthInput = $("#dateOfBirthInput"),
+            subjectsInput = $("#subjectsInput"),
+            hobbiesInput = $("#hobbiesWrapper"),
+            uploadPictureInput = $("#uploadPicture"),
+            currentAddressInput = $("#currentAddress"),
+            stateInput = $("#state"),
+            cityInput = $("#city"),
+            submitButton = $("#submit"),
+            resultTableText = $("#example-modal-sizes-title-lg");
+
     public Page_reg_form openPage() {
 
         open("/automation-practice-form");
@@ -26,76 +44,76 @@ public class Page_reg_form {
         return this;
     }
     public Page_reg_form setFirstName(String value) {
-        $("#firstName").setValue(value);
+        firstNameInput.setValue(value);
 
         return this;
     }
     public Page_reg_form setLastName(String value) {
-        $("#lastName").setValue(value);
+        lastNameInput.setValue(value);
 
         return this;
     }
     public Page_reg_form setEmail(String value) {
-        $("#userEmail").setValue("dart@tester.com");
+        userEmailInput.setValue(value);
 
         return this;
     }
     public Page_reg_form setGender(String value) {
-        $("#genterWrapper").$(byText("Other")).click();
+        genderInput.$(byText(value)).click();
 
         return this;
     }
     public Page_reg_form setNumber(String value) {
-        $("#userNumber").setValue("81233212112");
+        userNumberInput.setValue(value);
 
         return this;
     }
     public Page_reg_form setDateOfBirth(String day, String month, String year) {
-        $("#dateOfBirthInput").click();
+        dateOfBirthInput.click();
         calender_component.setDate(day, month, year);
 
         return this;
     }
     public Page_reg_form setSubject(String value) {
-        $("#subjectsInput").sendKeys("Maths");
-        $("#subjectsInput").pressEnter();
+        subjectsInput.sendKeys(value);
+        subjectsInput.pressEnter();
 
         return this;
     }
     public Page_reg_form setHobbies(String value) {
-        $("#hobbiesWrapper").$(byText("Sports")).click();
+        hobbiesInput.$(byText(value)).click();
 
         return this;
     }
     public Page_reg_form setPicture(String value) {
-        $("#uploadPicture").uploadFromClasspath("pic.png");
+        uploadPictureInput.uploadFromClasspath(value);
 
         return this;
     }
     public Page_reg_form setAddress(String value) {
-        $("#currentAddress").setValue("Address1");
+        currentAddressInput.setValue(value);
 
         return this;
     }
     public Page_reg_form setState(String value) {
-        $("#state").click();
+        stateInput.click();
         state_component.setState(value);
 
         return this;
     }
     public Page_reg_form setCity(String value) {
-        $("#city").click();
+        cityInput.click();
         city_component.setCity(value);
 
         return this;
     }
     public Page_reg_form clickSubmit() {
-        $("#submit").click();
+        submitButton.click();
 
         return this;
     }
-    public Page_reg_form checkFormOpened(String value) {
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+    public Page_reg_form checkFormOpened() {
+        resultTableText.shouldHave(text("Thanks for submitting the form"));
 
         return this;
     }

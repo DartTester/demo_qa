@@ -11,14 +11,9 @@ import static utils.RandomUtils.getRandomString;
 
 public class RegistrationFormWithFakerTests extends TestBase {
 
+  // можно убрать в TestData
     Faker faker = new Faker();
 
-
-//    String name = faker.name().fullName(); // Miss Samanta Schmidt
-//    String firstName = faker.name().firstName(); // Emory
-//    String lastName = faker.name().lastName(); // Barton
-
-    // можно убрать в TestData
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
     String email = faker.internet().emailAddress();
