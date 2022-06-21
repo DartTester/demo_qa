@@ -11,8 +11,8 @@ public class RegistrationFormTests extends tests.TestBase {
 
     @Test
     void successfulTest() {
-        String firstName = "Alex";
-        String lastName = "Egorov";
+        String firstName = "Dart";
+        String lastName = "Tester";
 
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
